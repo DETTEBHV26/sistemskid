@@ -33,6 +33,22 @@ async function loadDataFromSheet() {
     }
 }
 
+
+// Safe load after all functions are defined
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        loadDataFromSheet();
+    } catch (err) {
+        console.error('Error loading data from Sheets:', err);
+        // Load from localStorage as fallback
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+});
+
 </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js">
 async function loadDataFromSheet() {
@@ -62,6 +78,22 @@ async function loadDataFromSheet() {
         updateDashboard();
     }
 }
+
+
+// Safe load after all functions are defined
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        loadDataFromSheet();
+    } catch (err) {
+        console.error('Error loading data from Sheets:', err);
+        // Load from localStorage as fallback
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+});
 
 </script>
     <style>
@@ -543,7 +575,7 @@ async function loadDataFromSheet() {
 let pinjamanList = [];
 
 // Load from Google Sheets when page loads
-document.addEventListener('DOMContentLoaded', loadDataFromSheet);
+// document.addEventListener('DOMContentLoaded', loadDataFromSheet); // moved to bottom
 
         
         // Charts
@@ -1452,6 +1484,22 @@ async function loadDataFromSheet() {
     }
 }
 
+
+// Safe load after all functions are defined
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        loadDataFromSheet();
+    } catch (err) {
+        console.error('Error loading data from Sheets:', err);
+        // Load from localStorage as fallback
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+});
+
 </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b33f5931280c6d',t:'MTc1NDUzMjczMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
 async function loadDataFromSheet() {
@@ -1481,6 +1529,22 @@ async function loadDataFromSheet() {
         updateDashboard();
     }
 }
+
+
+// Safe load after all functions are defined
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        loadDataFromSheet();
+    } catch (err) {
+        console.error('Error loading data from Sheets:', err);
+        // Load from localStorage as fallback
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+});
 
 </script></body>
 </html>
