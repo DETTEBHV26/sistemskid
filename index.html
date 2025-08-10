@@ -4,8 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Pengurusan Pinjaman Buku - Pusat Sumber SK Inanam II</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.tailwindcss.com">
+async function loadDataFromSheet() {
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getData');
+        const data = await response.json();
+
+        if (data.muridList) muridList = data.muridList;
+        if (data.pinjamanList) pinjamanList = data.pinjamanList;
+
+        // Cache locally for faster reloads
+        localStorage.setItem('muridList', JSON.stringify(muridList));
+        localStorage.setItem('pinjamanList', JSON.stringify(pinjamanList));
+
+        // Refresh UI
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+
+    } catch (error) {
+        console.error('Error loading from Google Sheets:', error);
+        // Fallback to local cache if offline
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+}
+
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js">
+async function loadDataFromSheet() {
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getData');
+        const data = await response.json();
+
+        if (data.muridList) muridList = data.muridList;
+        if (data.pinjamanList) pinjamanList = data.pinjamanList;
+
+        // Cache locally for faster reloads
+        localStorage.setItem('muridList', JSON.stringify(muridList));
+        localStorage.setItem('pinjamanList', JSON.stringify(pinjamanList));
+
+        // Refresh UI
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+
+    } catch (error) {
+        console.error('Error loading from Google Sheets:', error);
+        // Fallback to local cache if offline
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+}
+
+</script>
     <style>
         @media print {
             body * {
@@ -481,8 +539,12 @@
         };
         
         // Data storage
-        let muridList = JSON.parse(localStorage.getItem('muridList')) || [];
-        let pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        let muridList = [];
+let pinjamanList = [];
+
+// Load from Google Sheets when page loads
+document.addEventListener('DOMContentLoaded', loadDataFromSheet);
+
         
         // Charts
         let statusChart, kelasChart;
@@ -602,7 +664,26 @@
             });
             localStorage.setItem('muridList', JSON.stringify(muridList));
             
-            // Clear form
+            
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'saveData',
+                type: 'muridList',
+                data: muridList
+            })
+        });
+        if (response.ok) {
+            loadDataFromSheet(); // Reload data from Sheets
+        } else {
+            throw new Error('Failed to save to Google Sheets');
+        }
+    } catch (error) {
+        console.error('Save error:', error);
+    }
+// Clear form
             document.getElementById('namaMurid').value = '';
             document.getElementById('kelasMurid').value = '';
             
@@ -912,7 +993,26 @@
                     pinjamanList.push(pinjamanData);
                     localStorage.setItem('pinjamanList', JSON.stringify(pinjamanList));
                     
-                    // Clear form
+                    
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                action: 'saveData',
+                type: 'pinjamanList',
+                data: pinjamanList
+            })
+        });
+        if (response.ok) {
+            loadDataFromSheet(); // Reload data from Sheets
+        } else {
+            throw new Error('Failed to save to Google Sheets');
+        }
+    } catch (error) {
+        console.error('Save error:', error);
+    }
+// Clear form
                     document.getElementById('formPinjaman').reset();
                     setTarikhHariIni();
                     
@@ -1323,7 +1423,65 @@
                 window.print();
             }, 100);
         }
-    </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b33f5931280c6d',t:'MTc1NDUzMjczMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    
+async function loadDataFromSheet() {
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getData');
+        const data = await response.json();
+
+        if (data.muridList) muridList = data.muridList;
+        if (data.pinjamanList) pinjamanList = data.pinjamanList;
+
+        // Cache locally for faster reloads
+        localStorage.setItem('muridList', JSON.stringify(muridList));
+        localStorage.setItem('pinjamanList', JSON.stringify(pinjamanList));
+
+        // Refresh UI
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+
+    } catch (error) {
+        console.error('Error loading from Google Sheets:', error);
+        // Fallback to local cache if offline
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+}
+
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b33f5931280c6d',t:'MTc1NDUzMjczMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();
+async function loadDataFromSheet() {
+    try {
+        const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getData');
+        const data = await response.json();
+
+        if (data.muridList) muridList = data.muridList;
+        if (data.pinjamanList) pinjamanList = data.pinjamanList;
+
+        // Cache locally for faster reloads
+        localStorage.setItem('muridList', JSON.stringify(muridList));
+        localStorage.setItem('pinjamanList', JSON.stringify(pinjamanList));
+
+        // Refresh UI
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+
+    } catch (error) {
+        console.error('Error loading from Google Sheets:', error);
+        // Fallback to local cache if offline
+        muridList = JSON.parse(localStorage.getItem('muridList')) || [];
+        pinjamanList = JSON.parse(localStorage.getItem('pinjamanList')) || [];
+        muatSenaraiMurid();
+        muatJadualPinjaman();
+        updateDashboard();
+    }
+}
+
+</script></body>
 </html>
 
