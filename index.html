@@ -1,109 +1,436 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sistem Pengurusan Pinjaman Buku</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pameran Maya Bulan Kebangsaan</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f0f4f8; /* Light gray-blue background */
+        }
+        .container-main {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        .exhibit-section {
+            display: none;
+        }
+        .active-section {
+            display: block;
+        }
+        .nav-btn {
+            @apply px-6 py-3 rounded-full font-bold shadow-md transition-all duration-300 transform hover:scale-105;
+        }
+        .card-effect {
+            @apply transition-all duration-300 transform hover:scale-105 hover:shadow-xl;
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-  <div class="container mx-auto px-4 py-8">
-    <h1 class="text-2xl font-bold mb-6 text-center">Sistem Pengurusan Pinjaman Buku</h1>
-    <div id="error" class="text-red-600 mb-4"></div>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Senarai Murid</h2>
-        <table class="min-w-full bg-white rounded shadow" id="muridTable">
-          <thead>
-            <tr>
-              <th class="px-4 py-2 border">Nama</th>
-              <th class="px-4 py-2 border">Kelas</th>
-              <th class="px-4 py-2 border">Tarikh Daftar</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Data will load here -->
-          </tbody>
-        </table>
-      </div>
-      <div>
-        <h2 class="text-xl font-semibold mb-2">Senarai Pinjaman</h2>
-        <table class="min-w-full bg-white rounded shadow" id="pinjamanTable">
-          <thead>
-            <tr>
-              <th class="px-4 py-2 border">Nama</th>
-              <th class="px-4 py-2 border">Kelas</th>
-              <th class="px-4 py-2 border">Tajuk Buku</th>
-              <th class="px-4 py-2 border">Tarikh Pinjaman</th>
-              <th class="px-4 py-2 border">Tarikh Pulangan</th>
-              <th class="px-4 py-2 border">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <!-- Data will load here -->
-          </tbody>
-        </table>
-      </div>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Kontena Utama Pameran -->
+    <div class="container-main max-w-7xl mx-auto p-4 sm:p-6 lg:p-8">
+        
+        <!-- Tajuk Utama -->
+        <header class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-blue-700 leading-tight">
+                Pameran Maya <span class="text-red-600">Bulan Kebangsaan</span> 2025 🎉
+            </h1>
+            <p class="text-lg sm:text-xl lg:text-2xl mt-4 text-gray-600 font-semibold">
+                Selamat Menyambut Hari Kemerdekaan ke-68! 🇲🇾
+            </p>
+        </header>
+
+        <!-- Navigasi Tab -->
+        <nav class="w-full mb-12">
+            <div class="flex flex-wrap justify-center space-x-2 sm:space-x-4">
+                <button onclick="showSection('home')" class="nav-btn bg-blue-500 text-white hover:bg-blue-600">Laman Utama</button>
+                <button onclick="showSection('sejarah')" class="nav-btn bg-red-500 text-white hover:bg-red-600">Galeri Sejarah</button>
+                <button onclick="showSection('lambang')" class="nav-btn bg-yellow-500 text-white hover:bg-yellow-600">Lambang Negara</button>
+                <button onclick="showSection('pm')" class="nav-btn bg-green-500 text-white hover:bg-green-600">Senarai PM</button>
+                <button onclick="showSection('kuiz')" class="nav-btn bg-purple-500 text-white hover:bg-purple-600">Kuiz Merdeka</button>
+            </div>
+        </nav>
+
+        <!-- Bahagian Pameran -->
+        
+        <!-- 1. Laman Utama -->
+        <section id="home" class="exhibit-section active-section bg-white rounded-xl shadow-lg p-6 md:p-10 card-effect">
+            <h2 class="text-3xl font-bold mb-4 text-center text-blue-700">Selamat Datang ke Pameran Maya 👋</h2>
+            <p class="text-gray-700 leading-relaxed text-center">
+                Pameran ini diwujudkan untuk menghargai perjuangan dan semangat perpaduan rakyat Malaysia sempena Hari Kebangsaan.
+                Terokai pelbagai galeri untuk mendalami sejarah, mengenali lambang negara, dan menguji pengetahuan anda tentang Malaysia!
+            </p>
+            <div class="mt-6 flex justify-center">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Jalur_Gemilang_Hari_Kebangsaan.jpg/1280px-Jalur_Gemilang_Hari_Kebangsaan.jpg" alt="Selamat Hari Merdeka" class="rounded-lg shadow-md max-w-full h-auto">
+            </div>
+        </section>
+
+        <!-- 2. Galeri Sejarah -->
+        <section id="sejarah" class="exhibit-section bg-white rounded-xl shadow-lg p-6 md:p-10">
+            <h2 class="text-3xl font-bold mb-6 text-center text-red-700">Galeri Sejarah Ringkas 📜</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Sejarah 1: Pembentukan Persekutuan Tanah Melayu -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md card-effect">
+                    <img src="https://www.arkib.gov.my/documents/10157/f12e2f3d-514d-444f-a035-6435c24e0f06" alt="Pembentukan Persekutuan Tanah Melayu" class="rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Pembentukan Persekutuan Tanah Melayu</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Pada 1 Februari 1948, Persekutuan Tanah Melayu dibentuk, menggantikan Malayan Union yang ditentang hebat oleh orang Melayu. Persekutuan ini menjadi langkah penting ke arah kemerdekaan.
+                    </p>
+                </div>
+                <!-- Sejarah 2: Pilihan Raya Umum Pertama -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Pilihan_raya_persekutuan_tanah_melayu_1955.jpg" alt="Pilihan Raya Umum Pertama 1955" class="rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Pilihan Raya Umum 1955</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Pilihan raya umum pertama diadakan pada 27 Julai 1955. Perikatan memenangi 51 daripada 52 kerusi yang dipertandingkan, menunjukkan sokongan padu rakyat terhadap perjuangan kemerdekaan.
+                    </p>
+                </div>
+                <!-- Sejarah 3: Rundingan London -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md card-effect">
+                    <img src="https://i.ytimg.com/vi/W-0bI3Xn0Xk/maxresdefault.jpg" alt="Rundingan London 1956" class="rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Rundingan London</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Satu delegasi diketuai oleh Tunku Abdul Rahman Putra Al-Haj berlepas ke London pada 18 Januari 1956 untuk merundingkan kemerdekaan. Perjanjian ditandatangani pada 8 Februari 1956.
+                    </p>
+                </div>
+                <!-- Sejarah 4: Pengumuman Kemerdekaan -->
+                <div class="bg-gray-50 p-6 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/Merdeka-1957.jpg/1280px-Merdeka-1957.jpg" alt="Pengumuman Kemerdekaan 1957" class="rounded-lg mb-4">
+                    <h3 class="text-xl font-bold mb-2 text-red-600">Detik Kemerdekaan</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Pada 31 Ogos 1957, Tunku Abdul Rahman mengisytiharkan kemerdekaan Persekutuan Tanah Melayu di Stadium Merdeka, Kuala Lumpur, dengan laungan "Merdeka!" sebanyak tujuh kali.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. Lambang Negara -->
+        <section id="lambang" class="exhibit-section bg-white rounded-xl shadow-lg p-6 md:p-10">
+            <h2 class="text-3xl font-bold mb-6 text-center text-yellow-700">Lambang-lambang Negara ✨</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Lambang 1: Jalur Gemilang -->
+                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Jalur_Gemilang_Hari_Kebangsaan.jpg/1280px-Jalur_Gemilang_Hari_Kebangsaan.jpg" alt="Jalur Gemilang" class="rounded-lg shadow-md mb-4">
+                    <h3 class="text-xl font-bold mb-2 text-yellow-600">Jalur Gemilang</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Bendera kebangsaan Malaysia, melambangkan perpaduan dan kedaulatan negara.
+                    </p>
+                </div>
+                <!-- Lambang 2: Jata Negara -->
+                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Coat_of_arms_of_Malaysia.svg/800px-Coat_of_arms_of_Malaysia.svg.png" alt="Jata Negara" class="rounded-lg shadow-md mb-4 w-28 h-auto">
+                    <h3 class="text-xl font-bold mb-2 text-yellow-600">Jata Negara</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Lambang rasmi Malaysia, mengandungi moto "Bersekutu Bertambah Mutu" dalam tulisan Rumi dan Jawi.
+                    </p>
+                </div>
+                <!-- Lambang 3: Bunga Raya -->
+                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Hibiscus_rosa-sinensis_double_red_flower.jpg/1024px-Hibiscus_rosa-sinensis_double_red_flower.jpg" alt="Bunga Raya" class="rounded-lg shadow-md mb-4">
+                    <h3 class="text-bold mb-2 text-yellow-600">Bunga Raya</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Bunga kebangsaan Malaysia, lima kelopaknya melambangkan lima prinsip Rukun Negara.
+                    </p>
+                </div>
+                <!-- Lambang 4: Lagu Negaraku -->
+                <div class="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/87/Partitur_lagu_Negaraku.jpg/1280px-Partitur_lagu_Negaraku.jpg" alt="Lagu Negaraku" class="rounded-lg shadow-md mb-4">
+                    <h3 class="text-xl font-bold mb-2 text-yellow-600">Lagu Negaraku</h3>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Lagu kebangsaan yang dicipta untuk menyemai semangat patriotisme dan perpaduan.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Senarai Perdana Menteri -->
+        <section id="pm" class="exhibit-section bg-white rounded-xl shadow-lg p-6 md:p-10">
+            <h2 class="text-3xl font-bold mb-6 text-center text-green-700">Senarai Perdana Menteri Malaysia 🏛️</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- PM 1 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Tunku_Abdul_Rahman.jpg/1024px-Tunku_Abdul_Rahman.jpg" alt="Tunku Abdul Rahman Putra Al-Haj" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Tunku Abdul Rahman</h3>
+                    <p class="text-sm text-gray-500">1957 - 1970</p>
+                </div>
+                <!-- PM 2 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Tun_Abdul_Razak_on_Malaysian_stamp.jpg/800px-Tun_Abdul_Razak_on_Malaysian_stamp.jpg" alt="Tun Abdul Razak" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Tun Abdul Razak</h3>
+                    <p class="text-sm text-gray-500">1970 - 1976</p>
+                </div>
+                <!-- PM 3 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Tun_Hussein_Onn.jpg/1024px-Tun_Hussein_Onn.jpg" alt="Tun Hussein Onn" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Tun Hussein Onn</h3>
+                    <p class="text-sm text-gray-500">1976 - 1981</p>
+                </div>
+                <!-- PM 4 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Mahathir_Mohamad_2018.jpg/1280px-Mahathir_Mohamad_2018.jpg" alt="Tun Dr. Mahathir Mohamad" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Tun Dr. Mahathir Mohamad</h3>
+                    <p class="text-sm text-gray-500">1981 - 2003, 2018 - 2020</p>
+                </div>
+                <!-- PM 5 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Abdullah_Badawi.jpg/1024px-Abdullah_Badawi.jpg" alt="Tun Abdullah Ahmad Badawi" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Tun Abdullah Ahmad Badawi</h3>
+                    <p class="text-sm text-gray-500">2003 - 2009</p>
+                </div>
+                <!-- PM 6 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Najib_Razak_2017.jpg/1024px-Najib_Razak_2017.jpg" alt="Dato' Sri Najib Razak" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Dato' Sri Najib Razak</h3>
+                    <p class="text-sm text-gray-500">2009 - 2018</p>
+                </div>
+                <!-- PM 7 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Mahathir_Mohamad_2018.jpg/1280px-Mahathir_Mohamad_2018.jpg" alt="Tun Dr. Mahathir Mohamad" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Tun Dr. Mahathir Mohamad</h3>
+                    <p class="text-sm text-gray-500">2018 - 2020</p>
+                </div>
+                <!-- PM 8 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/Muhyiddin_Yassin_2020.jpg/1024px-Muhyiddin_Yassin_2020.jpg" alt="Tan Sri Muhyiddin Yassin" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Tan Sri Muhyiddin Yassin</h3>
+                    <p class="text-sm text-gray-500">2020 - 2021</p>
+                </div>
+                <!-- PM 9 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Ismail_Sabri_Yaakob_2021.jpg/1024px-Ismail_Sabri_Yaakob_2021.jpg" alt="Dato' Sri Ismail Sabri Yaakob" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Dato' Sri Ismail Sabri Yaakob</h3>
+                    <p class="text-sm text-gray-500">2021 - 2022</p>
+                </div>
+                <!-- PM 10 -->
+                <div class="text-center p-4 bg-gray-50 rounded-lg shadow-md card-effect">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Anwar_Ibrahim_2022.jpg/1280px-Anwar_Ibrahim_2022.jpg" alt="Dato' Seri Anwar Ibrahim" class="rounded-full mx-auto mb-2 w-24 h-24 object-cover">
+                    <h3 class="font-bold text-green-600">Dato' Seri Anwar Ibrahim</h3>
+                    <p class="text-sm text-gray-500">2022 - kini</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. Kuiz Merdeka -->
+        <section id="kuiz" class="exhibit-section bg-white rounded-xl shadow-lg p-6 md:p-10 text-center">
+            <h2 class="text-3xl font-bold mb-6 text-purple-700">Kuiz Merdeka 🤔</h2>
+            <div id="quiz-container">
+                <div id="question-card" class="bg-gray-50 p-6 rounded-lg shadow-inner card-effect">
+                    <p id="question-number" class="text-gray-500 font-medium mb-2">Soalan 1 / 15</p>
+                    <h3 id="question-text" class="text-xl font-semibold mb-6"></h3>
+                    <div id="options-container" class="flex flex-col space-y-4"></div>
+                </div>
+                <button id="next-btn" class="mt-6 px-6 py-3 bg-purple-600 text-white font-bold rounded-full shadow-md hover:bg-purple-700 transition-colors duration-200 hidden">
+                    Soalan Seterusnya
+                </button>
+            </div>
+            <div id="result-container" class="hidden">
+                <h3 class="text-3xl font-bold text-blue-600 mb-4">Kuiz Tamat! 🥳</h3>
+                <p id="final-score" class="text-2xl font-bold mb-4"></p>
+                <p id="result-message" class="text-lg text-gray-600 mb-6"></p>
+                <button onclick="restartQuiz()" class="px-6 py-3 bg-blue-500 text-white font-bold rounded-full shadow-md hover:bg-blue-600 transition-colors duration-200">
+                    Cuba Lagi
+                </button>
+            </div>
+        </section>
     </div>
-    <div class="mt-8 text-sm text-gray-500 text-center" id="lastUpdate"></div>
-  </div>
-  <script>
-    const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz1QLVnMzAs9jwMkaZMWHaiLfUFkrb1P5sKeeXZ-3Vs6xoVWvOZOU97OIZotLyLOPJm/exec';
 
-    async function loadDataFromSheet() {
-      try {
-        const response = await fetch(GOOGLE_SCRIPT_URL + '?action=getData');
-        if (!response.ok) throw new Error('Gagal menghubungi Google Sheets.');
-        const data = await response.json();
-        updateMuridTable(data.muridList);
-        updatePinjamanTable(data.pinjamanList);
-        document.getElementById('lastUpdate').textContent = 'Kemaskini terakhir: ' + (new Date(data.lastUpdate)).toLocaleString();
-        document.getElementById('error').textContent = '';
-      } catch (error) {
-        document.getElementById('error').textContent = 'Ralat: ' + error.message;
-      }
-    }
+    <script>
+        // Data Kuiz
+        const quizData = [
+            {
+                question: "Pada 31 Ogos 1957, Tunku Abdul Rahman telah mengisytiharkan kemerdekaan di...",
+                options: ["Stadium Merdeka", "Stadium Nasional Bukit Jalil", "Dataran Merdeka", "Bangunan Parlimen"],
+                answer: "Stadium Merdeka"
+            },
+            {
+                question: "Apakah nama bunga kebangsaan Malaysia?",
+                options: ["Bunga Mawar", "Bunga Matahari", "Bunga Raya", "Bunga Orkid"],
+                answer: "Bunga Raya"
+            },
+            {
+                question: "Berapa jalur yang terdapat pada bendera Malaysia?",
+                options: ["12", "13", "14", "15"],
+                answer: "14"
+            },
+            {
+                question: "Apakah nama ibu negara Malaysia?",
+                options: ["Putrajaya", "Kuala Lumpur", "Shah Alam", "Johor Bahru"],
+                answer: "Kuala Lumpur"
+            },
+            {
+                question: "Siapakah Perdana Menteri Malaysia yang pertama?",
+                options: ["Tun Abdul Razak", "Tun Hussein Onn", "Tunku Abdul Rahman Putra Al-Haj", "Tun Dr. Mahathir Mohamad"],
+                answer: "Tunku Abdul Rahman Putra Al-Haj"
+            },
+            {
+                question: "Bilakah Hari Malaysia disambut?",
+                options: ["31 Ogos", "16 September", "9 Julai", "1 Mei"],
+                answer: "16 September"
+            },
+            {
+                question: "Apakah nama rasmi bendera Malaysia?",
+                options: ["Jalur Merah", "Jalur Gemilang", "Bintang Cemerlang", "Bulan Sabit"],
+                answer: "Jalur Gemilang"
+            },
+            {
+                question: "Berapakah negeri yang membentuk Malaysia?",
+                options: ["13 negeri dan 3 wilayah persekutuan", "14 negeri", "11 negeri", "12 negeri"],
+                answer: "13 negeri dan 3 wilayah persekutuan"
+            },
+            {
+                question: "Apakah haiwan yang terdapat pada jata negara?",
+                options: ["Gajah dan harimau", "Singa dan harimau", "Dua ekor harimau", "Harimau dan kerbau"],
+                answer: "Dua ekor harimau"
+            },
+            {
+                question: "Siapakah yang mencipta lagu 'Negaraku'?",
+                options: ["Tunku Abdul Rahman", "Saiful Bahri", "Lagu Negaraku berasal dari lagu negeri Perak", "Tan Sri P. Ramlee"],
+                answer: "Lagu Negaraku berasal dari lagu negeri Perak"
+            },
+            {
+                question: "Apakah nama penuh Perdana Menteri Malaysia kini?",
+                options: ["Dato' Seri Anwar bin Ibrahim", "Tun Dr. Mahathir bin Mohamad", "Tan Sri Muhyiddin bin Yassin", "Dato' Sri Ismail Sabri bin Yaakob"],
+                answer: "Dato' Seri Anwar bin Ibrahim"
+            },
+            {
+                question: "Bulan dan bintang pada bendera Malaysia melambangkan agama...",
+                options: ["Islam", "Kristian", "Hindu", "Buddha"],
+                answer: "Islam"
+            },
+            {
+                question: "Apakah tujuan Hari Kemerdekaan disambut?",
+                options: ["Menghormati pahlawan", "Menghargai perpaduan", "Memperingati pembebasan negara dari penjajahan", "Semua di atas"],
+                answer: "Semua di atas"
+            },
+            {
+                question: "Apakah slogan Hari Kebangsaan Malaysia tahun 2024?",
+                options: ["Malaysia Madani", "Sayangi Malaysiaku", "Malaysia: Kita Bersatu Hati", "Malaysia Sejahtera"],
+                answer: "Malaysia Madani" // Slogan terkini atau yang paling mungkin digunakan
+            },
+            {
+                question: "Jalur merah dan putih pada Jalur Gemilang melambangkan...",
+                options: ["Keberanian dan kesucian", "Perpaduan dan kedaulatan", "Kegembiraan dan kesedihan", "Kemakmuran dan kekayaan"],
+                answer: "Keberanian dan kesucian"
+            }
+        ];
 
-    function updateMuridTable(muridList) {
-      const tbody = document.querySelector('#muridTable tbody');
-      tbody.innerHTML = '';
-      if (!muridList || muridList.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="3" class="text-center p-4 text-gray-500">Tiada data murid.</td></tr>';
-        return;
-      }
-      muridList.forEach(murid => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="px-4 py-2 border">${murid.nama}</td>
-          <td class="px-4 py-2 border">${murid.kelas}</td>
-          <td class="px-4 py-2 border">${murid.tarikhDaftar}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let isAnswered = false;
 
-    function updatePinjamanTable(pinjamanList) {
-      const tbody = document.querySelector('#pinjamanTable tbody');
-      tbody.innerHTML = '';
-      if (!pinjamanList || pinjamanList.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="6" class="text-center p-4 text-gray-500">Tiada data pinjaman.</td></tr>';
-        return;
-      }
-      pinjamanList.forEach(pinjaman => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td class="px-4 py-2 border">${pinjaman.nama}</td>
-          <td class="px-4 py-2 border">${pinjaman.kelas}</td>
-          <td class="px-4 py-2 border">${pinjaman.tajukBuku}</td>
-          <td class="px-4 py-2 border">${pinjaman.tarikhPinjaman}</td>
-          <td class="px-4 py-2 border">${pinjaman.tarikhPulangan}</td>
-          <td class="px-4 py-2 border">${pinjaman.status}</td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
+        const quizContainer = document.getElementById('quiz-container');
+        const questionCard = document.getElementById('question-card');
+        const questionNumber = document.getElementById('question-number');
+        const questionText = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const nextBtn = document.getElementById('next-btn');
+        const resultContainer = document.getElementById('result-container');
+        const finalScore = document.getElementById('final-score');
+        const resultMessage = document.getElementById('result-message');
 
-    window.addEventListener('DOMContentLoaded', loadDataFromSheet);
-  </script>
+        // Fungsi untuk menukar bahagian pameran
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.exhibit-section');
+            sections.forEach(section => {
+                section.classList.remove('active-section');
+            });
+            document.getElementById(sectionId).classList.add('active-section');
+        }
+
+        // Fungsi untuk memulakan kuiz
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            quizContainer.classList.remove('hidden');
+            resultContainer.classList.add('hidden');
+            showQuestion();
+        }
+
+        // Fungsi untuk memaparkan soalan
+        function showQuestion() {
+            isAnswered = false;
+            nextBtn.classList.add('hidden');
+            optionsContainer.innerHTML = '';
+            
+            const currentQuestion = quizData[currentQuestionIndex];
+            questionNumber.textContent = `Soalan ${currentQuestionIndex + 1} / ${quizData.length}`;
+            questionText.textContent = currentQuestion.question;
+
+            currentQuestion.options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('px-4', 'py-3', 'bg-gray-200', 'rounded-lg', 'font-medium', 'text-gray-700', 'text-left', 'transition-colors', 'duration-200', 'hover:bg-gray-300');
+                button.addEventListener('click', () => selectAnswer(option, currentQuestion.answer, button));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // Fungsi untuk memilih jawapan
+        function selectAnswer(selectedOption, correctAnswer, button) {
+            if (isAnswered) return;
+            isAnswered = true;
+
+            if (selectedOption === correctAnswer) {
+                score++;
+                button.classList.add('bg-green-500', 'text-white', 'hover:bg-green-500');
+            } else {
+                button.classList.add('bg-red-500', 'text-white', 'hover:bg-red-500');
+                // Highlight correct answer
+                const allOptions = optionsContainer.querySelectorAll('button');
+                allOptions.forEach(opt => {
+                    if (opt.textContent === correctAnswer) {
+                        opt.classList.add('bg-green-500', 'text-white');
+                    }
+                });
+            }
+
+            nextBtn.classList.remove('hidden');
+        }
+
+        // Fungsi untuk ke soalan seterusnya atau tamat kuiz
+        nextBtn.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < quizData.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        // Fungsi untuk memaparkan keputusan
+        function showResults() {
+            quizContainer.classList.add('hidden');
+            resultContainer.classList.remove('hidden');
+            finalScore.textContent = `Anda mendapat ${score} daripada ${quizData.length} jawapan yang betul.`;
+            
+            if (score === quizData.length) {
+                resultMessage.textContent = 'Tahniah! Anda seorang yang sangat patriotik!';
+            } else if (score >= quizData.length / 2) {
+                resultMessage.textContent = 'Usaha yang baik! Anda kenali negara anda.';
+            } else {
+                resultMessage.textContent = 'Terus belajar dan cintai Malaysia!';
+            }
+        }
+
+        // Fungsi untuk memulakan semula kuiz
+        function restartQuiz() {
+            startQuiz();
+        }
+
+        // Mulakan kuiz secara automatik apabila halaman dimuat
+        document.addEventListener('DOMContentLoaded', () => {
+            startQuiz();
+        });
+
+    </script>
 </body>
 </html>
